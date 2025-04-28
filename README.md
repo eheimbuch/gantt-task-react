@@ -195,3 +195,5 @@ npm start
 ## License
 
 [MIT](https://oss.ninja/mit/jaredpalmer/)
+
+This project is a fork of [gantt-react-task](https://github.com/MaTeMaTuK/gantt-task-react) by MaTeMaTuK.
