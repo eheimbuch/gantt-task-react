@@ -15,7 +15,7 @@ import {
 
 import { initTasks, onAddTask, onEditTask } from "./helper";
 
-import "../dist/style.css";
+import "../dist/gantt-task-react.css";
 import {
   Checkbox,
   FormControl,
@@ -144,7 +144,7 @@ export const CustomColumns_VerticalScroll: React.FC = props => {
     { type: TaskListColumnEnum.PROGRESS, name: "Progress" },
   ];
 
-  const handleChangeColumns = event => {
+  const handleChangeColumns = (event: any) => {
     const columnTypes: TaskListColumnEnum[] = event.target.value;
     const newMetaColumns = allMetaColumns.filter(col =>
       columnTypes.includes(col.type)

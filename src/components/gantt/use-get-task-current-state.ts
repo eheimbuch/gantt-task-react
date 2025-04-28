@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 
-import addMilliseconds from "date-fns/addMilliseconds";
-import maxDate from "date-fns/max";
-import minDate from "date-fns/min";
+import {addMilliseconds} from "date-fns/addMilliseconds";
+import {max} from "date-fns/max";
+import {min} from "date-fns/min";
 
 import { checkIsDescendant } from "../../helpers/check-is-descendant";
 
@@ -166,8 +166,8 @@ export const useGetTaskCurrentState = ({
 
           return {
             ...currentOriginalTask,
-            start: minDate(startDates),
-            end: maxDate(endDates),
+            start: min(startDates),
+            end: max(endDates),
           };
         }
       }

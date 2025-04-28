@@ -1,18 +1,18 @@
-import addDays from "date-fns/addDays";
-import addHours from "date-fns/addHours";
-import addMonths from "date-fns/addMonths";
-import addWeeks from "date-fns/addWeeks";
-import addYears from "date-fns/addYears";
-import differenceInDays from "date-fns/differenceInDays";
-import differenceInHours from "date-fns/differenceInHours";
-import differenceInMinutes from "date-fns/differenceInMinutes";
-import differenceInMonths from "date-fns/differenceInMonths";
-import startOfDay from "date-fns/startOfDay";
-import startOfHour from "date-fns/startOfHour";
-import startOfMonth from "date-fns/startOfMonth";
-import startOfWeek from "date-fns/startOfISOWeek";
-import startOfYear from "date-fns/startOfYear";
+import {addDays} from "date-fns/addDays";
+import {addHours} from "date-fns/addHours";
+import {addMonths} from "date-fns/addMonths";
+import {addWeeks} from "date-fns/addWeeks";
+import {addYears} from "date-fns/addYears";
+import {differenceInDays} from "date-fns/differenceInDays";
+import {differenceInHours} from "date-fns/differenceInHours";
+import {differenceInMinutes} from "date-fns/differenceInMinutes";
+import {differenceInMonths} from "date-fns/differenceInMonths";
+import {startOfDay} from "date-fns/startOfDay";
+import {startOfHour} from "date-fns/startOfHour";
+import { startOfWeek } from "date-fns/startOfWeek";
+import {startOfMonth} from "date-fns/startOfMonth";
 
+import {startOfYear} from "date-fns/startOfYear";
 import { ViewMode } from "../../types/public-types";
 
 export const defaultRoundStartDate = (
@@ -24,7 +24,7 @@ export const defaultRoundStartDate = (
       {
       const start = startOfHour(date);
       const diff = differenceInMinutes(date, start);
-      
+
       if (diff < 30) {
         return start;
       }
@@ -36,7 +36,7 @@ export const defaultRoundStartDate = (
     {
       const start = startOfDay(date);
       const diff = differenceInHours(date, start);
-      
+
       if (diff < 3) {
         return start;
       }
@@ -60,7 +60,7 @@ export const defaultRoundStartDate = (
     {
       const start = startOfDay(date);
       const diff = differenceInHours(date, start);
-      
+
       if (diff < 6) {
         return start;
       }
@@ -76,7 +76,7 @@ export const defaultRoundStartDate = (
     {
       const start = startOfDay(date);
       const diff = differenceInHours(date, start);
-      
+
       if (diff < 12) {
         return start;
       }
@@ -88,7 +88,7 @@ export const defaultRoundStartDate = (
     {
       const start = startOfWeek(date);
       const diff = differenceInDays(date, start);
-      
+
       if (diff < 4) {
         return start;
       }
@@ -100,7 +100,7 @@ export const defaultRoundStartDate = (
     {
       const start = startOfMonth(date);
       const diff = differenceInDays(date, start);
-      
+
       if (diff < 15) {
         return start;
       }
@@ -112,7 +112,7 @@ export const defaultRoundStartDate = (
     {
       const start = startOfYear(date);
       const diff = differenceInMonths(date, start);
-      
+
       if (diff < 6) {
         return start;
       }

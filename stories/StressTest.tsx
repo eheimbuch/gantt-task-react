@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 
-import addDays from "date-fns/addDays";
+import { addDays } from "date-fns/addDays";
 
 import { Gantt, OnChangeTasks, Task, TaskOrEmpty } from "../src";
 
 import { onAddTask, onEditTask } from "./helper";
 
-import "../dist/style.css";
+import "../dist/gantt-task-react.css";
 
 // 4 * ()
 

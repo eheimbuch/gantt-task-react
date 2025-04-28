@@ -2,7 +2,6 @@ import React, { useCallback, useState } from "react";
 
 import {
   BarMoveAction,
-  ColumnProps,
   DateExtremity,
   Gantt,
   GanttDateRoundingTimeUnit,
@@ -16,7 +15,7 @@ import {
 
 import { initTasks, onAddTask, onEditTask } from "./helper";
 
-import "../dist/style.css";
+import "../dist/gantt-task-react.css";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
@@ -70,14 +69,6 @@ export const CustomPalette_Zoom: React.FC = props => {
   const handleClick = useCallback((task: TaskOrEmpty) => {
     console.log("On Click event Id:" + task.id);
   }, []);
-
-  const ProgressColumn: React.FC<ColumnProps> = ({ data: { task } }) => {
-    if (task.type === "project" || task.type === "task") {
-      return <>{task.progress}%</>;
-    }
-
-    return null;
-  };
 
   const handleTaskDelete = (task: Task) => {
     const conf = window.confirm("Are you sure about " + task.name + " ?");
@@ -178,9 +169,9 @@ export const CustomPalette_Zoom: React.FC = props => {
       if (t => t.id == taskTo.id) {
         const dependenciesToKeep = taskTo.dependencies?.filter(dependency => {
           const isDependencyToRemove =
-            dependency.sourceId == taskFrom.id &&
-            dependency.sourceTarget == extremityFrom &&
-            dependency.ownTarget == extremityTo;
+            dependency.sourceId === taskFrom.id &&
+            dependency.sourceTarget === extremityFrom &&
+            dependency.ownTarget === extremityTo;
           return !isDependencyToRemove;
         });
         return {
@@ -258,101 +249,6 @@ export const CustomPalette_Zoom: React.FC = props => {
     }
   };
 
-  // TODO roundDate function could be integrated in the project core and based on dateMoveStep prop. Then this test code should be used as unit test.
-  const testRoundDate = () => {
-    roundAndCheck(
-      new Date(2010, 0, 1, 0, 0),
-      new Date(2010, 0, 1, 0, 0),
-      roundStartDate,
-      "start"
-    );
-    roundAndCheck(
-      new Date(2010, 0, 1, 1, 0),
-      new Date(2010, 0, 1, 0, 0),
-      roundStartDate,
-      "start"
-    );
-    roundAndCheck(
-      new Date(2010, 0, 5, 1, 0),
-      new Date(2010, 0, 1, 0, 0),
-      roundStartDate,
-      "start"
-    );
-
-    roundAndCheck(
-      new Date(2010, 0, 1, 0, 0),
-      new Date(2010, 0, 1, 0, 0),
-      roundEndDate,
-      "start"
-    );
-    roundAndCheck(
-      new Date(2010, 0, 1, 1, 0),
-      new Date(2010, 0, 11, 0, 0),
-      roundEndDate,
-      "start"
-    );
-    roundAndCheck(
-      new Date(2010, 0, 5, 1, 0),
-      new Date(2010, 0, 11, 0, 0),
-      roundEndDate,
-      "start"
-    );
-    roundAndCheck(
-      new Date(2010, 0, 5, 1, 0),
-      new Date(2010, 0, 1, 0, 0),
-      roundEndDate,
-      "move"
-    );
-
-    roundAndCheck(
-      new Date(2010, 1, 10, 0, 0),
-      new Date(2010, 1, 10, 0, 0),
-      roundEndDate,
-      "start"
-    );
-    roundAndCheck(
-      new Date(2010, 1, 10, 1, 1),
-      new Date(2010, 1, 20, 0, 0),
-      roundEndDate,
-      "start"
-    );
-    roundAndCheck(
-      new Date(2010, 1, 15, 0, 1),
-      new Date(2010, 1, 20, 0, 0),
-      roundEndDate,
-      "start"
-    );
-    roundAndCheck(
-      new Date(2010, 1, 15, 0, 1),
-      new Date(2010, 1, 10, 0, 0),
-      roundEndDate,
-      "move"
-    );
-  };
-
-  const roundAndCheck = (
-    inputDate: Date,
-    expected: Date,
-    roundDate: (date: Date, action: BarMoveAction) => Date,
-    action: BarMoveAction
-  ) => {
-    const roundedDate = roundDate(inputDate, action);
-    testDate(expected, roundedDate);
-  };
-
-  const testDate = (expected: Date, current: Date) => {
-    if (expected.getTime() != current.getTime()) {
-      console.log(
-        "INVALID: Expected: " +
-          expected.getDate() +
-          " current: " +
-          current.getDate()
-      );
-    } else {
-      console.log("OK");
-    }
-  };
-
   const dateMoveStep = { value: 1, timeUnit: GanttDateRoundingTimeUnit.DAY };
 
   const getDayOfTheYear = (date: Date) => {
@@ -367,10 +263,10 @@ export const CustomPalette_Zoom: React.FC = props => {
     return day;
   };
 
-  /* 
+  /*
   The rounding for start Date is always done with floor value
   */
-  const roundStartDate = (date: Date, action: BarMoveAction): Date => {
+  const roundStartDate = (date: Date, _: BarMoveAction): Date => {
     let value = dateMoveStep.value;
     const dimension = dateMoveStep.timeUnit;
     const newdate = new Date(date);
@@ -404,7 +300,7 @@ export const CustomPalette_Zoom: React.FC = props => {
     return newdate;
   };
 
-  /* 
+  /*
   The rounding for end Date is always done with ceil value
   */
   const roundEndDate = (date: Date, action: BarMoveAction): Date => {
@@ -464,15 +360,15 @@ export const CustomPalette_Zoom: React.FC = props => {
 
     let isHoliday = false;
     const isMondayStart =
-      date.getDay() == 1 && date.getHours() == 0 && date.getMinutes() == 0;
+      date.getDay() === 1 && date.getHours() === 0 && date.getMinutes() === 0;
     const isStaturdayStart =
-      date.getDay() == 6 && date.getHours() == 0 && date.getMinutes() == 0;
-    if (dateExtremity == "startOfTask") {
+      date.getDay() === 6 && date.getHours() === 0 && date.getMinutes() === 0;
+    if (dateExtremity === "startOfTask") {
       //Monday 00:00 is excluded from WE
-      isHoliday = day == 6 || (day == 0 && !isMondayStart);
-    } else if (dateExtremity == "endOfTask") {
+      isHoliday = day === 6 || (day === 0 && !isMondayStart);
+    } else if (dateExtremity === "endOfTask") {
       //Saturday 00:00 is included from WE
-      isHoliday = (day == 6 && !isStaturdayStart) || day == 0 || isMondayStart;
+      isHoliday = (day === 6 && !isStaturdayStart) || day === 0 || isMondayStart;
     }
 
     return isHoliday;
@@ -495,7 +391,6 @@ export const CustomPalette_Zoom: React.FC = props => {
       onChangeExpandState={onChangeExpandState}
       checkIsHoliday={checkIsHoliday}
       dateMoveStep={dateMoveStep}
-      // isAdjustToWorkingDates={false}
     />
   );
 };

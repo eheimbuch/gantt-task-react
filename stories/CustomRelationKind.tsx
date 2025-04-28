@@ -12,7 +12,7 @@ import {
 
 import { initTasks, onAddTask, onEditTask } from "./helper";
 
-import "../dist/style.css";
+import "../dist/gantt-task-react.css";
 
 export const CustomRelationKind: React.FC = props => {
   const [tasks, setTasks] = useState<readonly TaskOrEmpty[]>(initTasks());

@@ -4,7 +4,7 @@ import { Gantt, Task, TaskOrEmpty, OnChangeTasks } from "../src";
 
 import { initTasks, onAddTask, onEditTask } from "./helper";
 
-import "../dist/style.css";
+import "../dist/gantt-task-react.css";
 
 export const Warnings: React.FC = props => {
   const [tasks, setTasks] = useState<readonly TaskOrEmpty[]>(initTasks());

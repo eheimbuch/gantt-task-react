@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-import enDateLocale from "date-fns/locale/en-US";
+import { enUS } from "date-fns/locale/en-US";
 
 import {
   BarMoveAction,
@@ -182,7 +182,7 @@ export const Gantt: React.FC<GanttProps> = ({
                                               comparisonLevels = 1,
                                               contextMenuOptions: contextMenuOptionsProp = undefined,
                                               dateFormats: dateFormatsProp = undefined,
-                                              dateLocale = enDateLocale,
+                                              dateLocale = enUS,
                                               distances: distancesProp = undefined,
                                               enableTableListContextMenu = false,
                                               fixEndPosition: fixEndPositionProp = undefined,

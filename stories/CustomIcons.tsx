@@ -11,7 +11,7 @@ import {
 
 import { initTasks, onAddTask, onEditTask } from "./helper";
 
-import "../dist/style.css";
+import "../dist/gantt-task-react.css";
 
 const icons: Icons = {
   renderAddIcon: () => <>➕</>,
