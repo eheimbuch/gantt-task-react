@@ -180,8 +180,8 @@ export interface Task {
   hideChildren?: boolean;
   displayOrder?: number;
   comparisonLevel?: number;
-  plannedDuration?: number;
   totalSlack?: number;
+  critical?: boolean;
 }
 
 export interface EmptyTask {

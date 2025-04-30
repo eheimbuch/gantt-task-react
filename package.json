@@ -1,6 +1,6 @@
 {
   "name": "@eheimbuch94/gantt-task-react",
-  "version": "0.7.2",
+  "version": "0.8.0",
   "description": "Interactive Gantt Chart for React with TypeScript",
   "author": "Eheimbuch <eheimbuch@users.noreply.github.com>",
   "homepage": "https://github.com/eheimbuch/gantt-task-react/blob/main/README.md#gantt-task-react",
